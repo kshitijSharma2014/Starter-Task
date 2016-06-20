@@ -1,0 +1,74 @@
+<header class="hero-unit" id="banner" xmlns="http://www.w3.org/1999/html">
+  <div class="container">
+    <h1>Angular.js and D3.js Task</h1>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="page-header">Table:</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type (Cash/Credit)</th>
+          <th>Price</th>
+          <th>Date</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="item in $ctrl.customers">
+          <td>{{item.name}}</td>
+          <td>{{item.type}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.date | date : "dd-MMMM-yyyy"}}</td>
+          <td>
+            <button class="btn btn-danger" ng-click="$ctrl.deleteCustomers(item)">Remove</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-lg-4">
+      <div class="well">
+        <h3>Add A Row</h3>
+        <form class="thing-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Name" ng-model="$ctrl.customer.name">
+          </div>
+          <div class="form-group">
+            <label>Type: </label>
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="$ctrl.customer.type" uib-btn-radio="'Cash'"
+                     uncheckable>Cash</label>
+              <label class="btn btn-primary" ng-model="$ctrl.customer.type" uib-btn-radio="'Credit'"
+                     uncheckable>Credit</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" class="form-control" placeholder="Price" ng-model="$ctrl.customer.price">
+          </div>
+          <p class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="$ctrl.customer.date"
+                   is-open="$ctrl.popup.opened" datepicker-options="$ctrl.dateOptions" ng-required="true"
+                   close-text="Close"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="$ctrl.open()">
+                <i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <div class="text-right">
+            <button class="btn btn-primary" ng-click="$ctrl.addCustomer()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<h3>Pie Chart</h3>
+  <nvd3 options="$ctrl.chartOptions" data="$ctrl.data" config="{refreshDataOnly: true}"></nvd3>
+
+</div>
+
